@@ -18,6 +18,7 @@ Elf64_Shdr *find_section_by_name(unsigned char *p, const char *name);
 
 Elf64_Shdr *find_section_for_injection(unsigned char *p);
 
+long long unsigned int get_base_address(unsigned char *p);
 
 size_t get_file_size(int fd);
 

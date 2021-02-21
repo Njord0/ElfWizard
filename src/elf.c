@@ -61,6 +61,24 @@ Elf64_Shdr *find_section_for_injection(unsigned char *p)
     return find_section_by_name(p, ".note.ABI-tag");
 }
 
+long long unsigned int get_base_address(unsigned char *p)
+{
+    Elf64_Ehdr *header = (Elf64_Ehdr*)p;
+    Elf64_Phdr *pheader = (Elf64_Phdr*)(p+header->e_phoff);
+
+    long long unsigned min = pheader->p_vaddr;
+
+    for (int i = 1; i < header->e_phnum; i++)
+    {
+        pheader = (Elf64_Phdr*)(p+header->e_phoff + i * header->e_phentsize);
+
+        if ((pheader->p_vaddr < min) && (pheader->p_type == PT_LOAD)) 
+            min = pheader->p_vaddr;
+    }
+
+    return min;
+}
+
 size_t get_file_size(int fd) 
 {
     struct stat st;
@@ -108,6 +126,9 @@ void inject_code(const char *filename, const char *code)
     if (val == NULL)
         fatal_error("error while allocating memeory");
 
+    if (get_base_address(p) != 0x400000)
+        fatal_error("Not working with base address != 0x400000");
+
     unsigned char *pos = code;
 
     for (size_t count = 0; count < strlen(code)/2; count++) {
@@ -149,9 +170,7 @@ void inject_code(const char *filename, const char *code)
     if (f != NULL)
     {
         fwrite(stub_save, sizeof(char), 16, f);
-
         fwrite(val, sizeof(char), strlen(code)/2, f);
-
         fwrite(stub_rest, sizeof(char), 9, f);
         fwrite(ret_entry, sizeof(char), 12, f);
     }
