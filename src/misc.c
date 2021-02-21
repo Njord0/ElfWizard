@@ -22,16 +22,3 @@ void fatal_error(const char *msg)
     fflush(stderr);
     abort();
 }
-
-unsigned char *get_random_key(size_t size)
-{
-
-    unsigned char *ptr = malloc(sizeof(char) * size);
-    if (ptr == NULL)
-        fatal_error("malloc error");
-
-    for (uint i = 0; i < size; i++)
-        ptr[i] = '\x41';
-
-    return ptr;
-}
