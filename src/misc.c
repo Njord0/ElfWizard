@@ -8,8 +8,6 @@ void print_usage()
     printf("Usage:\n");
     printf("\t./inject [Options] (Parameters) elf_file\n");
     printf("OPTIONS:\n");
-    printf("\t--crypt : crypt .text section, modify OEP and add function to decrypt section at runtime\n");
-
     printf("\t--inject : inject code at end of file (with extra stub), modify OEP and some sections\n");
     printf("\t\t--code is needed and must contains the shellcode to execute\n");
 
