@@ -10,6 +10,11 @@
 #include <elf.h>
 #include <misc.h>
 
+const char *NOTE_SECTIONS[] = {
+    ".note.ABI-tag",
+    ".note.gnu.build-id"
+};
+
 bool is_valid(unsigned char *p)
 {
     return (
@@ -58,7 +63,14 @@ Elf64_Shdr *find_section_by_name(unsigned char *p, const char *name)
 }
 Elf64_Shdr *find_section_for_injection(unsigned char *p)
 {
-    return find_section_by_name(p, ".note.ABI-tag");
+    Elf64_Shdr *ptr = NULL;
+    for (int i = 0; i < 2; i++)
+    {
+
+        ptr = find_section_by_name(p, NOTE_SECTIONS[i]);
+        if (ptr != NULL)
+            return ptr;
+    }
 }
 
 long long unsigned int get_base_address(unsigned char *p)
