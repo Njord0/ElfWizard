@@ -187,4 +187,7 @@ void inject_code(const char *filename, const char *code)
         fwrite(ret_entry, sizeof(char), 12, f);
     }
 
+    fclose(f);
+    close(fd);
+
 }
