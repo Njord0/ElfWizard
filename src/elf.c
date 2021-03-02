@@ -71,6 +71,8 @@ Elf64_Shdr *find_section_for_injection(unsigned char *p)
         if (ptr != NULL)
             return ptr;
     }
+
+    return ptr;
 }
 
 long long unsigned int get_base_address(unsigned char *p)
