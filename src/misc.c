@@ -1,7 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <bsd/stdlib.h>
+#include <sys/stat.h>
 #include <misc.h>
+
+size_t get_file_size(int fd) 
+{
+    struct stat st;
+    fstat(fd, &st);
+    return (size_t)st.st_size;
+}
 
 void print_usage()
 {

@@ -3,6 +3,7 @@
 
 #include <misc.h>
 #include <elf.h>
+#include <elf64.h>
 
 int main(int argc, char **argv)
 {
