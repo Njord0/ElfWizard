@@ -1,8 +1,8 @@
-xor eax,eax
 section .text
     global _start
 
 _start:
+    xor eax, eax
     push   eax
     push   0xa646c72
     push   0x6f77206f
