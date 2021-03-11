@@ -99,7 +99,9 @@ long long unsigned int get_base_address_64b(unsigned char *p)
 
 void inject_code_64b(const char *filename, const char *code, unsigned char *p, int fd)
 {
- 
+    printf("[+] 64 bits binary\n");
+
+
     Elf64_Phdr *pheader = find_segment_header_64b(p);
     if (pheader == NULL)
         fatal_error("can't find a PT_NOTE segment");
@@ -171,4 +173,5 @@ void inject_code_64b(const char *filename, const char *code, unsigned char *p, i
     }
 
     fclose(f);
+    free(val);
 }

@@ -26,8 +26,8 @@ void inject_code(const char *filename, const char *code)
 
     if (is_valid_64b(p))
         inject_code_64b(filename, code, p, fd);
-    // else if (is_valid_32b(p))
-    //    inject_code_32b(filename, code, p);
+    else if (is_valid_32b(p))
+        inject_code_32b(filename, code, p, fd);
     else
         fatal_error("not a valid elf file");
 

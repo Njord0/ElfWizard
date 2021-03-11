@@ -2,6 +2,7 @@
 #define _ELF64_H
 
 #include <stdbool.h>
+#include <linux/elf.h>
 
 bool is_valid_64b(unsigned char *p);
 
@@ -15,3 +16,8 @@ void inject_code_64b(const char *filename, const char *code, unsigned char *p, i
 
 
 #endif
+
+/*
+def round(a: int) -> int:
+...     return a - (a%4096) if a %4096 < 4096/2 else a + 4096 - (a%4096)
+*/
