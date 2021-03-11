@@ -1,6 +1,8 @@
 # ElfWizard
 A simple tool to inject shellcode into an ELF binary.
 
+![](test/example.gif)
+
 ## Requirements
 * gcc
 * A ELF binary (no PIE)
